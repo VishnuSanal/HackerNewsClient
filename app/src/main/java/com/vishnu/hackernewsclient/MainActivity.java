@@ -1,3 +1,22 @@
+/*
+ * Copyright (C) 2023 Vishnu Sanal T
+ *
+ * This file is part of Hacker News Client.
+ *
+ * Hacker News Client is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package com.vishnu.hackernewsclient;
 
 import android.os.Bundle;
@@ -34,30 +53,46 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
 
-
         adapter.submitList(getDummyList());
     }
 
     private List<NewsItem> getDummyList() {
         ArrayList<NewsItem> arrayList = new ArrayList<>();
 
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
+        arrayList.add(
+                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
 
         return arrayList;
     }

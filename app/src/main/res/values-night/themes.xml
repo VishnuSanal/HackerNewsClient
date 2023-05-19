@@ -1,17 +1,17 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Base application theme. -->
-    <style name="Base.Theme.HackerNewsClient" parent="Theme.Material3.DayNight.NoActionBar">
+	<!-- Base application theme. -->
+	<style name="Base.Theme.HackerNewsClient" parent="Theme.Material3.DayNight.NoActionBar">
 
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+		<!-- Customize your dark theme here. -->
+		<!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
 
-        <item name="backgroundColor">#17191D</item>
-        <item name="cardBackgroundColor">#050404</item>
+		<item name="backgroundColor">#17191D</item>
+		<item name="cardBackgroundColor">#050404</item>
 
-        <item name="textFillColor">@color/white</item>
-        <item name="textOutlineColor">#ECE4E4</item>
+		<item name="textFillColor">@color/white</item>
+		<item name="textOutlineColor">#ECE4E4</item>
 
-    </style>
+	</style>
 
 </resources>

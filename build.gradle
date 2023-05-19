@@ -2,4 +2,44 @@
 plugins {
     id 'com.android.application' version '8.0.1' apply false
     id 'com.android.library' version '8.0.1' apply false
+    id "com.diffplug.spotless" version "6.18.0"
+}
+
+spotless {
+    java {
+
+        licenseHeaderFile 'license-spotless'
+
+        importOrder('android', 'androidx', 'com', 'java', 'phone', '')
+
+        target 'app/src/**/*.java'
+
+        googleJavaFormat('1.10.0').aosp()
+
+        removeUnusedImports()
+
+        delete rootProject.buildDir
+    }
+
+    kotlin {
+
+        licenseHeaderFile 'license-spotless'
+
+        target 'app/src/**/*.kt'
+
+        ktlint("0.46.1")
+
+        trimTrailingWhitespace()
+
+        delete rootProject.buildDir
+    }
+
+    format 'xml',  {
+
+        target 'app/src/**/*.xml'
+
+        trimTrailingWhitespace()
+        indentWithTabs()
+
+    }
 }
