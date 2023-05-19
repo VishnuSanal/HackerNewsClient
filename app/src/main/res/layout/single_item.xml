@@ -23,6 +23,22 @@
 			tools:background="?colorPrimaryDark" />
 
 		<TextView
+			android:id="@+id/scoresTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:fontFamily="sans-serif"
+			android:gravity="center"
+			android:minWidth="48dp"
+			android:textSize="24sp"
+			app:drawableBottomCompat="@drawable/arrow_drop_up"
+			app:drawableTopCompat="@drawable/arrow_drop_down"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintStart_toEndOf="@id/sampleColorView"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:text="120" />
+
+		<TextView
 			android:id="@+id/titleTV"
 			android:layout_width="0dp"
 			android:layout_height="wrap_content"
@@ -34,14 +50,13 @@
 			android:textSize="16sp"
 			app:layout_constraintBottom_toTopOf="@id/linkTV"
 			app:layout_constraintEnd_toEndOf="parent"
-			app:layout_constraintStart_toEndOf="@id/sampleColorView"
+			app:layout_constraintStart_toEndOf="@id/scoresTV"
 			app:layout_constraintTop_toTopOf="parent"
-			app:layout_constraintVertical_bias="0"
-			tools:text="Google banned me – open sourcing all my apps" />
+			app:layout_constraintVertical_bias="0" />
 
 		<TextView
 			android:id="@+id/linkTV"
-			android:layout_width="wrap_content"
+			android:layout_width="0dp"
 			android:layout_height="wrap_content"
 			android:layout_marginStart="8dp"
 			android:layout_marginTop="2dp"
@@ -53,9 +68,8 @@
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
-			app:layout_constraintStart_toEndOf="@id/sampleColorView"
-			app:layout_constraintTop_toBottomOf="@id/titleTV"
-			tools:text="" />
+			app:layout_constraintStart_toEndOf="@id/scoresTV"
+			app:layout_constraintTop_toBottomOf="@id/titleTV" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

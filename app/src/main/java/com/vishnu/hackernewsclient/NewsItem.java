@@ -19,6 +19,8 @@
 
 package com.vishnu.hackernewsclient;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 public class NewsItem {
@@ -141,5 +143,34 @@ public class NewsItem {
                 && title.equals(newsItem.title)
                 && type.equals(newsItem.type)
                 && url.equals(newsItem.url);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return "NewsItem{"
+                + "id="
+                + id
+                + ", by='"
+                + by
+                + '\''
+                + ", descendants="
+                + descendants
+                + ", kids="
+                + kids
+                + ", score="
+                + score
+                + ", time="
+                + time
+                + ", title='"
+                + title
+                + '\''
+                + ", type='"
+                + type
+                + '\''
+                + ", url='"
+                + url
+                + '\''
+                + '}';
     }
 }

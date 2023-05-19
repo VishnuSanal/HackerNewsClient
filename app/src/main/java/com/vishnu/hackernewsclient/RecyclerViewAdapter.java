@@ -69,6 +69,8 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
 
         holder.titleTV.setText(item.getTitle());
         holder.linkTV.setText(item.getUrl());
+        holder.scoresTV.setText(String.valueOf(item.getScore()));
+
         holder.colorView.setBackground(new ColorDrawable(getCardBGColor()));
     }
 
@@ -85,7 +87,7 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView titleTV, linkTV;
+        private final TextView titleTV, linkTV, scoresTV;
         public final View colorView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -94,6 +96,7 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
             titleTV = itemView.findViewById(R.id.titleTV);
             linkTV = itemView.findViewById(R.id.linkTV);
             colorView = itemView.findViewById(R.id.sampleColorView);
+            scoresTV = itemView.findViewById(R.id.scoresTV);
         }
     }
 }

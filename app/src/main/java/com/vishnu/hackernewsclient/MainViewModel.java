@@ -49,7 +49,13 @@ public class MainViewModel extends ViewModel {
         new NewsRepository()
                 .getTopStories(
                         newsItem -> {
-                            itemArrayList.add(newsItem);
+                            if (itemArrayList.contains(newsItem)) return;
+
+                            int i = 0;
+                            while (i < itemArrayList.size()
+                                    && newsItem.getScore() <= itemArrayList.get(i).getScore()) i++;
+
+                            itemArrayList.add(i, newsItem);
                             mutableLiveData.setValue(itemArrayList);
                         });
     }
