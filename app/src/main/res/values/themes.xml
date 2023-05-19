@@ -16,4 +16,15 @@
 
 	<style name="Theme.HackerNewsClient" parent="Base.Theme.HackerNewsClient" />
 
+	<style name="CustomBottomSheetDialogTheme" parent="Theme.MaterialComponents.DayNight.BottomSheetDialog">
+		<item name="bottomSheetStyle">@style/CustomBottomSheetStyle</item>
+		<item name="android:windowIsFloating">false</item>
+		<item name="android:windowSoftInputMode">adjustResize</item>
+		<item name="android:statusBarColor">@android:color/transparent</item>
+	</style>
+
+	<style name="CustomBottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+		<item name="android:background">@drawable/bottom_sheet_background</item>
+	</style>
+
 </resources>

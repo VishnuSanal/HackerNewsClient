@@ -21,9 +21,10 @@ package com.vishnu.hackernewsclient;
 
 import androidx.annotation.NonNull;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class NewsItem {
+public class NewsItem implements Serializable {
 
     private long id;
     private String by;

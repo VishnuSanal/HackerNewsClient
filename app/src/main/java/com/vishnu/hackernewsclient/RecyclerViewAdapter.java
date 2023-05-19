@@ -19,10 +19,8 @@
 
 package com.vishnu.hackernewsclient;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +34,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.Random;
 
 public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapter.ViewHolder> {
+
+    private OnItemClickListener listener;
 
     protected RecyclerViewAdapter() {
         super(
@@ -74,17 +74,6 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
         holder.scoresTV.setText(String.valueOf(item.getScore()));
 
         holder.colorView.setBackground(new ColorDrawable(getCardBGColor()));
-
-        holder.itemView.setOnClickListener(
-                v ->
-                        holder.itemView
-                                .getContext()
-                                .startActivity(
-                                        new Intent(
-                                                Intent.ACTION_VIEW,
-                                                Uri.parse(
-                                                        "https://news.ycombinator.com/item?id="
-                                                                + item.getId()))));
     }
 
     private int getCardBGColor() {
@@ -98,7 +87,15 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
         return Color.parseColor(colorArray[new Random().nextInt(colorArray.length - 1)]);
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(NewsItem newsItem);
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView titleTV, linkTV, scoresTV;
         public final View colorView;
@@ -110,6 +107,12 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
             linkTV = itemView.findViewById(R.id.linkTV);
             colorView = itemView.findViewById(R.id.sampleColorView);
             scoresTV = itemView.findViewById(R.id.scoresTV);
+
+            itemView.setOnClickListener(
+                    v -> {
+                        if (listener != null && getAdapterPosition() != RecyclerView.NO_POSITION)
+                            listener.onItemClick(getItem(getAdapterPosition()));
+                    });
         }
     }
 }

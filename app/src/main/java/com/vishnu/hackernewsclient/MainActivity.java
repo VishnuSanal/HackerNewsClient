@@ -19,6 +19,8 @@
 
 package com.vishnu.hackernewsclient;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 
@@ -56,6 +58,20 @@ public class MainActivity extends AppCompatActivity {
 
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
+
+        adapter.setOnItemClickListener(
+                newsItem -> {
+                    if (newsItem.getType().equals("story"))
+                        CommentsFragment.newInstance(newsItem)
+                                .show(getSupportFragmentManager(), null);
+                    else
+                        startActivity(
+                                new Intent(
+                                        Intent.ACTION_VIEW,
+                                        Uri.parse(
+                                                "https://news.ycombinator.com/item?id="
+                                                        + newsItem.getId())));
+                });
 
         viewModel = new ViewModelProvider(this).get(MainViewModel.class);
 
