@@ -6,6 +6,15 @@
 	android:layout_height="match_parent"
 	tools:context=".MainActivity">
 
+	<com.google.android.material.progressindicator.LinearProgressIndicator
+		android:id="@+id/progressIndicator"
+		android:layout_width="0dp"
+		android:layout_height="wrap_content"
+		android:indeterminate="true"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/recyclerView"
 		android:layout_width="0dp"
@@ -14,7 +23,7 @@
 		app:layout_constraintBottom_toBottomOf="parent"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/progressIndicator"
 		tools:listitem="@layout/single_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

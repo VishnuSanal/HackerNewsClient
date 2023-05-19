@@ -20,6 +20,7 @@
 package com.vishnu.hackernewsclient;
 
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -28,14 +29,14 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
     private MainViewModel viewModel;
+    private LinearProgressIndicator progressIndicator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         recyclerView = findViewById(R.id.recyclerView);
+        progressIndicator = findViewById(R.id.progressIndicator);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -64,50 +66,9 @@ public class MainActivity extends AppCompatActivity {
                         list -> {
                             adapter.submitList(list);
 
-                            adapter.notifyDataSetChanged();
+                            adapter.notifyItemRangeChanged(0, list.size());
 
-                            // progressIndicator.setVisibility(View.GONE);
+                            progressIndicator.setVisibility(View.GONE);
                         });
-    }
-
-    private List<NewsItem> getDummyList() {
-        ArrayList<NewsItem> arrayList = new ArrayList<>();
-
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-        arrayList.add(
-                new NewsItem(0, "", 0, null, 0, 0, "Hello", "story", "https://archlinux.org"));
-
-        return arrayList;
     }
 }
