@@ -4,6 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:foreground="?android:attr/selectableItemBackgroundBorderless"
 	app:cardBackgroundColor="?backgroundColor"
 	app:cardCornerRadius="4dp"
 	app:cardElevation="4dp"
@@ -15,7 +16,7 @@
 
 		<View
 			android:id="@+id/sampleColorView"
-			android:layout_width="8dp"
+			android:layout_width="4dp"
 			android:layout_height="0dp"
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +48,7 @@
 			android:layout_marginEnd="8dp"
 			android:layout_marginBottom="2dp"
 			android:textColor="?attr/textFillColor"
-			android:textSize="16sp"
+			android:textSize="18sp"
 			app:layout_constraintBottom_toTopOf="@id/linkTV"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toEndOf="@id/scoresTV"
