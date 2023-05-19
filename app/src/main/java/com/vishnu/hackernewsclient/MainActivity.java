@@ -22,6 +22,7 @@ package com.vishnu.hackernewsclient;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
+    private MainViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,19 @@ public class MainActivity extends AppCompatActivity {
         adapter = new RecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
 
-        adapter.submitList(getDummyList());
+        viewModel = new ViewModelProvider(this).get(MainViewModel.class);
+
+        viewModel
+                .getTopStories()
+                .observe(
+                        this,
+                        list -> {
+                            adapter.submitList(list);
+
+                            adapter.notifyDataSetChanged();
+
+                            // progressIndicator.setVisibility(View.GONE);
+                        });
     }
 
     private List<NewsItem> getDummyList() {

@@ -138,7 +138,6 @@ public class NewsItem {
                 && score == newsItem.score
                 && time == newsItem.time
                 && by.equals(newsItem.by)
-                && kids.equals(newsItem.kids)
                 && title.equals(newsItem.title)
                 && type.equals(newsItem.type)
                 && url.equals(newsItem.url);
