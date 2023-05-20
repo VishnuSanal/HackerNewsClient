@@ -72,7 +72,7 @@ public class CommentsRecyclerViewAdapter
 
         CommentItem item = getItem(position);
 
-        holder.titleTV.setText(Html.fromHtml(item.getText()));
+        if (item.getText() != null) holder.titleTV.setText(Html.fromHtml(item.getText()));
 
         holder.detailsTV.setText(item.getBy());
 

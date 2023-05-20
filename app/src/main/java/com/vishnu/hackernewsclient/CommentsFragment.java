@@ -20,9 +20,11 @@
 package com.vishnu.hackernewsclient;
 
 import android.os.Bundle;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,6 +45,7 @@ public class CommentsFragment extends BottomSheetDialogFragment {
 
     private RecyclerView recyclerView;
     private LinearProgressIndicator progressIndicator;
+    private TextView commentTitleTV, commentLinkTV;
 
     private CommentsViewModel viewModel;
     private CommentsRecyclerViewAdapter adapter;
@@ -76,6 +79,8 @@ public class CommentsFragment extends BottomSheetDialogFragment {
 
         recyclerView = v.findViewById(R.id.commentRecyclerView);
         progressIndicator = v.findViewById(R.id.commentProgressIndicator);
+        commentTitleTV = v.findViewById(R.id.commentTitleTV);
+        commentLinkTV = v.findViewById(R.id.commentLinkTV);
 
         return v;
     }
@@ -83,6 +88,9 @@ public class CommentsFragment extends BottomSheetDialogFragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        commentTitleTV.setText(newsItem.getTitle());
+        commentLinkTV.setText(Html.fromHtml(newsItem.getUrl(), Html.FROM_HTML_MODE_COMPACT));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 

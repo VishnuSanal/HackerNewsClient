@@ -4,6 +4,7 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
+	android:layout_margin="8dp"
 	android:background="@drawable/bottom_sheet_background"
 	android:orientation="vertical"
 	tools:context=".CommentsFragment">
@@ -19,14 +20,31 @@
 			android:layout_margin="8dp"
 			android:letterSpacing="0.15"
 			android:padding="8dp"
-			android:text="Comments"
-			android:textColor="?colorAccent"
-			android:textSize="14sp"
-			app:layout_constraintBottom_toTopOf="@id/commentProgressIndicator"
+			android:textColor="?textFillColor"
+			android:textSize="18sp"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintTop_toTopOf="parent" />
+
+		<TextView
+			android:id="@+id/commentLinkTV"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="2dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginBottom="8dp"
+			android:autoLink="web"
+			android:letterSpacing="0.2"
+			android:linksClickable="true"
+			android:textColor="?textOutlineColor"
+			android:textSize="16sp"
+			app:layout_constraintBottom_toTopOf="@id/commentProgressIndicator"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintHorizontal_bias="0"
+			app:layout_constraintStart_toStartOf="@id/commentTitleTV"
+			app:layout_constraintTop_toBottomOf="@id/commentTitleTV" />
 
 		<com.google.android.material.progressindicator.LinearProgressIndicator
 			android:id="@+id/commentProgressIndicator"
@@ -35,7 +53,22 @@
 			android:indeterminate="true"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/commentTitleTV" />
+			app:layout_constraintTop_toBottomOf="@id/commentLinkTV" />
+
+		<View
+			android:id="@+id/commentSampleColorView"
+			android:layout_width="match_parent"
+			android:layout_height="4dp"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginBottom="4dp"
+			android:background="?textOutlineColor"
+			android:visibility="invisible"
+			app:layout_constraintBottom_toTopOf="@id/commentRecyclerView"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@id/commentProgressIndicator" />
 
 		<androidx.recyclerview.widget.RecyclerView
 			android:id="@+id/commentRecyclerView"
@@ -46,7 +79,7 @@
 			app:layout_constraintBottom_toBottomOf="parent"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@id/commentProgressIndicator"
+			app:layout_constraintTop_toBottomOf="@id/commentSampleColorView"
 			tools:listitem="@layout/single_item" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
 	<!-- Base application theme. -->
 	<style name="Base.Theme.HackerNewsClient" parent="Theme.Material3.DayNight.NoActionBar">
@@ -11,6 +11,8 @@
 
 		<item name="textFillColor">@color/white</item>
 		<item name="textOutlineColor">@color/darkTextLight</item>
+
+		<item name="backgroundTint">@color/darkBottomSheetBackground</item>
 
 	</style>
 
