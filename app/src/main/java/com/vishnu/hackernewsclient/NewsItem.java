@@ -59,6 +59,11 @@ public class NewsItem implements Serializable {
         this.url = url;
     }
 
+    public NewsItem(long id, ArrayList<Long> kids) {
+        this.id = id;
+        this.kids = kids;
+    }
+
     public long getId() {
         return id;
     }
@@ -142,8 +147,7 @@ public class NewsItem implements Serializable {
                 && time == newsItem.time
                 && by.equals(newsItem.by)
                 && title.equals(newsItem.title)
-                && type.equals(newsItem.type)
-                && url.equals(newsItem.url);
+                && type.equals(newsItem.type);
     }
 
     @NonNull

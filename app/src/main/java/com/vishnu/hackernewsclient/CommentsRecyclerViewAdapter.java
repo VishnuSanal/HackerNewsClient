@@ -76,13 +76,16 @@ public class CommentsRecyclerViewAdapter
 
         holder.detailsTV.setText(item.getBy());
 
+        if (item.getKids() != null)
+            holder.commentCountIV.setText(String.valueOf(item.getKids().size()));
+
         //        holder.detailsTV.setText(
         //                MessageFormat.format(
-        //                        "{0} | {1} ago",
+        //                        "{0} | {1}",
         //                        item.getBy(),
-        //                        new SimpleDateFormat("HH:mm", Locale.getDefault())
-        //                                .format(new Date(System.currentTimeMillis() -
-        // item.getTime()))));
+        //                        String.format(Locale.getDefault(),"%1$tH:%1$tM %1$td/%1$tm",
+        // item.getTime())
+        //                ));
 
         holder.colorView.setBackground(new ColorDrawable(getCardBGColor()));
     }
@@ -108,7 +111,7 @@ public class CommentsRecyclerViewAdapter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView titleTV, detailsTV;
+        private final TextView titleTV, detailsTV, commentCountIV;
         public final View colorView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -116,6 +119,7 @@ public class CommentsRecyclerViewAdapter
 
             titleTV = itemView.findViewById(R.id.commentTV);
             detailsTV = itemView.findViewById(R.id.commentDetailsTV);
+            commentCountIV = itemView.findViewById(R.id.commentCountIV);
             colorView = itemView.findViewById(R.id.commentSampleColorView);
 
             itemView.setOnClickListener(

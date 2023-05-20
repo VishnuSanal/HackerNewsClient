@@ -21,10 +21,12 @@ package com.vishnu.hackernewsclient;
 
 import android.os.Bundle;
 import android.text.Html;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,11 +39,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 
+import java.io.Serializable;
+
 public class CommentsFragment extends BottomSheetDialogFragment {
 
     private static final String NEWS_ITEM_KEY = "NEWS_ITEM";
 
-    private NewsItem newsItem = null;
+    @Nullable private NewsItem newsItem = null;
+
+    @Nullable private CommentItem commentItem = null;
 
     private RecyclerView recyclerView;
     private LinearProgressIndicator progressIndicator;
@@ -63,13 +69,28 @@ public class CommentsFragment extends BottomSheetDialogFragment {
         return fragment;
     }
 
+    public static CommentsFragment newInstance(CommentItem commentItem) {
+        Bundle bundle = new Bundle();
+
+        bundle.putSerializable(NEWS_ITEM_KEY, commentItem);
+
+        CommentsFragment fragment = new CommentsFragment();
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme);
 
-        if (getArguments() != null)
-            newsItem = (NewsItem) getArguments().getSerializable(NEWS_ITEM_KEY);
+        if (getArguments() != null) {
+
+            Serializable serializable = getArguments().getSerializable(NEWS_ITEM_KEY);
+
+            if (serializable instanceof NewsItem) newsItem = (NewsItem) serializable;
+            else if (serializable instanceof CommentItem) commentItem = (CommentItem) serializable;
+        }
     }
 
     @Override
@@ -89,12 +110,9 @@ public class CommentsFragment extends BottomSheetDialogFragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        commentTitleTV.setText(newsItem.getTitle());
-        commentLinkTV.setText(Html.fromHtml(newsItem.getUrl(), Html.FROM_HTML_MODE_COMPACT));
-
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
 
-        recyclerView.setHasFixedSize(true);
+        recyclerView.setHasFixedSize(false);
 
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(
@@ -103,18 +121,56 @@ public class CommentsFragment extends BottomSheetDialogFragment {
         adapter = new CommentsRecyclerViewAdapter();
         recyclerView.setAdapter(adapter);
 
+        adapter.setOnItemClickListener(
+                clickItem -> {
+                    if (clickItem.getKids() != null)
+                        CommentsFragment.newInstance(clickItem)
+                                .show(requireActivity().getSupportFragmentManager(), null);
+                    else
+                        Toast.makeText(
+                                        requireContext(),
+                                        "No more child comments!",
+                                        Toast.LENGTH_SHORT)
+                                .show();
+                });
+
         viewModel = new ViewModelProvider(requireActivity()).get(CommentsViewModel.class);
 
-        viewModel
-                .getChildComments(newsItem)
-                .observe(
-                        this,
-                        list -> {
-                            adapter.submitList(list, recyclerView::requestLayout);
+        if (newsItem != null) {
+            commentTitleTV.setText(newsItem.getTitle());
+            commentLinkTV.setText(Html.fromHtml(newsItem.getUrl(), Html.FROM_HTML_MODE_COMPACT));
 
-                            adapter.notifyItemRangeChanged(0, list.size());
+            viewModel
+                    .getChildComments(newsItem)
+                    .observe(
+                            this,
+                            list -> {
+                                adapter.submitList(list, recyclerView::requestLayout);
 
-                            progressIndicator.setVisibility(View.GONE);
-                        });
+                                adapter.notifyItemRangeChanged(0, list.size());
+
+                                progressIndicator.setVisibility(View.GONE);
+                            });
+
+        } else if (commentItem != null) {
+
+            commentTitleTV.setText(Html.fromHtml(commentItem.getText()));
+            commentTitleTV.setSingleLine(true);
+            commentTitleTV.setEllipsize(TextUtils.TruncateAt.END);
+
+            commentLinkTV.setVisibility(View.GONE);
+
+            viewModel
+                    .getChildComments(new NewsItem(commentItem.getId(), commentItem.getKids()))
+                    .observe(
+                            this,
+                            list -> {
+                                adapter.submitList(list, recyclerView::requestLayout);
+
+                                adapter.notifyItemRangeChanged(0, list.size());
+
+                                progressIndicator.setVisibility(View.GONE);
+                            });
+        }
     }
 }
