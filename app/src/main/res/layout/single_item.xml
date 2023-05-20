@@ -66,11 +66,41 @@
 			android:letterSpacing="0.1"
 			android:textColor="?textOutlineColor"
 			android:textSize="14sp"
-			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintBottom_toTopOf="@id/authorTV"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintHorizontal_bias="0"
 			app:layout_constraintStart_toEndOf="@id/scoresTV"
 			app:layout_constraintTop_toBottomOf="@id/titleTV" />
+
+		<TextView
+			android:id="@+id/authorTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_marginTop="2dp"
+			android:layout_marginEnd="8dp"
+			android:layout_marginBottom="8dp"
+			android:letterSpacing="0.1"
+			android:textColor="?textOutlineColor"
+			android:textSize="14sp"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toStartOf="@id/commentCountTV"
+			app:layout_constraintHorizontal_bias="0"
+			app:layout_constraintStart_toEndOf="@id/scoresTV"
+			app:layout_constraintTop_toBottomOf="@id/linkTV" />
+
+		<TextView
+			android:id="@+id/commentCountTV"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_margin="8dp"
+			android:drawablePadding="2dp"
+			android:gravity="center_vertical"
+			android:text="00"
+			app:drawableLeftCompat="@drawable/ic_comment"
+			app:layout_constraintBottom_toBottomOf="@id/authorTV"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="@id/authorTV" />
 
 	</androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

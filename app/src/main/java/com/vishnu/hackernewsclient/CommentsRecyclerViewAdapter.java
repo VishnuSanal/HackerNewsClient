@@ -76,8 +76,11 @@ public class CommentsRecyclerViewAdapter
 
         holder.detailsTV.setText(item.getBy());
 
-        if (item.getKids() != null)
-            holder.commentCountIV.setText(String.valueOf(item.getKids().size()));
+        if (item.getKids() != null) {
+            String s = String.valueOf(item.getKids().size());
+
+            holder.commentCountTV.setText(s.length() >= 2 ? s.substring(0, 2) : "0" + s); // hack!
+        }
 
         //        holder.detailsTV.setText(
         //                MessageFormat.format(
@@ -111,7 +114,7 @@ public class CommentsRecyclerViewAdapter
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView titleTV, detailsTV, commentCountIV;
+        private final TextView titleTV, detailsTV, commentCountTV;
         public final View colorView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -119,7 +122,7 @@ public class CommentsRecyclerViewAdapter
 
             titleTV = itemView.findViewById(R.id.commentTV);
             detailsTV = itemView.findViewById(R.id.commentDetailsTV);
-            commentCountIV = itemView.findViewById(R.id.commentCountIV);
+            commentCountTV = itemView.findViewById(R.id.commentCommentCountTV);
             colorView = itemView.findViewById(R.id.commentSampleColorView);
 
             itemView.setOnClickListener(

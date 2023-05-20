@@ -72,6 +72,13 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
         holder.titleTV.setText(item.getTitle());
         holder.linkTV.setText(item.getUrl());
         holder.scoresTV.setText(String.valueOf(item.getScore()));
+        holder.authorTV.setText(item.getBy());
+
+        if (item.getKids() != null) {
+            String s = String.valueOf(item.getKids().size());
+
+            holder.commentCountTV.setText(s.length() >= 2 ? s.substring(0, 2) : "0" + s); // hack!
+        }
 
         holder.colorView.setBackground(new ColorDrawable(getCardBGColor()));
     }
@@ -97,7 +104,7 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private final TextView titleTV, linkTV, scoresTV;
+        private final TextView titleTV, linkTV, scoresTV, commentCountTV, authorTV;
         public final View colorView;
 
         public ViewHolder(@NonNull View itemView) {
@@ -107,6 +114,8 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
             linkTV = itemView.findViewById(R.id.linkTV);
             colorView = itemView.findViewById(R.id.sampleColorView);
             scoresTV = itemView.findViewById(R.id.scoresTV);
+            commentCountTV = itemView.findViewById(R.id.commentCountTV);
+            authorTV = itemView.findViewById(R.id.authorTV);
 
             itemView.setOnClickListener(
                     v -> {
