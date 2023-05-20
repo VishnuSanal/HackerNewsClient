@@ -5,10 +5,10 @@ Just another hacker news client for Andorid!
 
 <table>
 	<tr>
-		<td> <img src="https://github.com/VishnuSanal/HackerNewsClient/assets/50027064/fcc59ee6-3483-449e-9ca6-a60176812ce7" alt="Home Dark" height=400px /> </td>
-		<td> <img src="https://github.com/VishnuSanal/HackerNewsClient/assets/50027064/a8628811-4897-4c4d-bb6b-d8ebf0a67020" alt="Comments Dark" height=400px /> </td>
-		<td> <img src="https://github.com/VishnuSanal/HackerNewsClient/assets/50027064/264c049e-91c6-4ac0-a8f1-b58060ddac76" alt="Home Light" height=400px /> </td>
-		<td> <img src="https://github.com/VishnuSanal/HackerNewsClient/assets/50027064/198d39c2-2d4c-410e-a363-fe8d58beac25" alt="Comments Light" height=400px /> </td>
+		<td> <img src="https://github.com/VishnuSanal/HackerNewsClient/assets/50027064/46110048-d3ec-4a39-b5de-89282072c173" alt="Home Dark" height=400px /> </td>
+		<td> <img src="https://github.com/VishnuSanal/HackerNewsClient/assets/50027064/09010cf2-85e5-4a37-9572-1b8d1011bb40" alt="Comments Dark" height=400px /> </td>
+		<td> <img src="https://github.com/VishnuSanal/HackerNewsClient/assets/50027064/005c293a-92ca-4159-bd30-1b2c4d3bae70" alt="Home Light" height=400px /> </td>
+		<td> <img src="https://github.com/VishnuSanal/HackerNewsClient/assets/50027064/37a8510d-18d4-458c-9ad1-5df86b16b8af" alt="Comments Light" height=400px /> </td>
 	</tr>
 	<tr>
     		<th> Home Dark </th>
