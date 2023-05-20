@@ -58,7 +58,7 @@ public class NewsRepository {
                                                 url,
                                                 null,
                                                 response -> {
-                                                    for (int i = 0; i < 10; i++) { // TODO:
+                                                    for (int i = 0; i < 50; i++) {
                                                         try {
                                                             long id = response.getLong(i);
 

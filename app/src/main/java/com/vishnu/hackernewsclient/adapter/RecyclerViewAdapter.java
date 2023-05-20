@@ -80,7 +80,7 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
         if (item.getKids() != null) {
             String s = String.valueOf(item.getKids().size());
 
-            holder.commentCountTV.setText(s.length() >= 2 ? s.substring(0, 2) : "0" + s); // hack!
+            holder.commentCountTV.setText(s.length() >= 2 ? s : s + " "); // hack!
         }
 
         holder.colorView.setBackground(new ColorDrawable(getCardBGColor()));
