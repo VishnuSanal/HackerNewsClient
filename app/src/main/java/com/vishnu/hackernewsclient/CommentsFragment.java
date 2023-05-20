@@ -19,20 +19,33 @@
 
 package com.vishnu.hackernewsclient;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+import com.google.android.material.progressindicator.LinearProgressIndicator;
 
 public class CommentsFragment extends BottomSheetDialogFragment {
 
     private static final String NEWS_ITEM_KEY = "NEWS_ITEM";
 
     private NewsItem newsItem = null;
+
+    private RecyclerView recyclerView;
+    private LinearProgressIndicator progressIndicator;
+
+    private CommentsViewModel viewModel;
+    private CommentsRecyclerViewAdapter adapter;
 
     public CommentsFragment() {}
 
@@ -61,11 +74,39 @@ public class CommentsFragment extends BottomSheetDialogFragment {
             LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_comments, container, false);
 
-        startActivity(
-                new Intent(
-                        Intent.ACTION_VIEW,
-                        Uri.parse("https://news.ycombinator.com/item?id=" + newsItem.getId())));
+        recyclerView = v.findViewById(R.id.commentRecyclerView);
+        progressIndicator = v.findViewById(R.id.commentProgressIndicator);
 
         return v;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
+        recyclerView.setHasFixedSize(true);
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(requireContext(), LinearLayoutManager.VERTICAL));
+
+        adapter = new CommentsRecyclerViewAdapter();
+        recyclerView.setAdapter(adapter);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(CommentsViewModel.class);
+
+        viewModel
+                .getChildComments(newsItem)
+                .observe(
+                        this,
+                        list -> {
+                            adapter.submitList(list, recyclerView::requestLayout);
+
+                            adapter.notifyItemRangeChanged(0, list.size());
+
+                            progressIndicator.setVisibility(View.GONE);
+                        });
     }
 }

@@ -102,8 +102,7 @@ public class NewsRepository {
                                                         cacheEntry = new Cache.Entry();
                                                     }
                                                     final long cacheHitButRefreshed = 1000;
-                                                    final long cacheExpired =
-                                                            7 * 24 * 60 * 60 * 1000;
+                                                    final long cacheExpired = 12 * 60 * 60 * 1000;
                                                     long now = System.currentTimeMillis();
                                                     final long softExpire =
                                                             now + cacheHitButRefreshed;
@@ -161,5 +160,29 @@ public class NewsRepository {
                         });
 
         thread.start();
+    }
+
+    public void getChildComments(NewsItem parent, final CommentsListAsyncResponse callBack) {
+
+        for (Long kid : parent.getKids()) {
+
+            String itemURL = "https://hacker-news.firebaseio.com/v0/item/" + kid + ".json";
+
+            AppController.getInstance()
+                    .addToRequestQueue(
+                            new JsonObjectRequest(
+                                    Request.Method.GET,
+                                    itemURL,
+                                    null,
+                                    item -> {
+                                        if (null != callBack)
+                                            callBack.processFinished(
+                                                    new Gson()
+                                                            .fromJson(
+                                                                    String.valueOf(item),
+                                                                    CommentItem.class));
+                                    },
+                                    Throwable::printStackTrace));
+        }
     }
 }
