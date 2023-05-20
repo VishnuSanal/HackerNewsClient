@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vishnu.hackernewsclient;
+package com.vishnu.hackernewsclient.repository;
 
 import com.android.volley.Cache;
 import com.android.volley.NetworkResponse;
@@ -30,6 +30,11 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.google.gson.Gson;
+import com.vishnu.hackernewsclient.controller.AppController;
+import com.vishnu.hackernewsclient.model.CommentItem;
+import com.vishnu.hackernewsclient.model.NewsItem;
+import com.vishnu.hackernewsclient.response.CommentsListAsyncResponse;
+import com.vishnu.hackernewsclient.response.NewsListAsyncResponse;
 
 import org.json.JSONArray;
 import org.json.JSONException;

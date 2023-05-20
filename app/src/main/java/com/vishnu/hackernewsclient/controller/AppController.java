@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vishnu.hackernewsclient;
+package com.vishnu.hackernewsclient.controller;
 
 import android.app.Application;
 

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vishnu.hackernewsclient;
+package com.vishnu.hackernewsclient.activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -32,6 +32,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.vishnu.hackernewsclient.R;
+import com.vishnu.hackernewsclient.adapter.RecyclerViewAdapter;
+import com.vishnu.hackernewsclient.fragment.CommentsFragment;
+import com.vishnu.hackernewsclient.viewmodel.MainViewModel;
 
 public class MainActivity extends AppCompatActivity {
 

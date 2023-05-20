@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vishnu.hackernewsclient;
+package com.vishnu.hackernewsclient.fragment;
 
 import android.os.Bundle;
 import android.text.Html;
@@ -38,6 +38,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
+import com.vishnu.hackernewsclient.R;
+import com.vishnu.hackernewsclient.adapter.CommentsRecyclerViewAdapter;
+import com.vishnu.hackernewsclient.model.CommentItem;
+import com.vishnu.hackernewsclient.model.NewsItem;
+import com.vishnu.hackernewsclient.viewmodel.CommentsViewModel;
 
 import java.io.Serializable;
 

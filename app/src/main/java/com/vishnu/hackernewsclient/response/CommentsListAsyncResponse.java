@@ -17,8 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vishnu.hackernewsclient;
+package com.vishnu.hackernewsclient.response;
 
-public interface NewsListAsyncResponse {
-    void processFinished(NewsItem newsItem);
+import com.vishnu.hackernewsclient.model.CommentItem;
+
+public interface CommentsListAsyncResponse {
+    void processFinished(CommentItem commentItem);
 }

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vishnu.hackernewsclient;
+package com.vishnu.hackernewsclient.adapter;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -31,13 +31,16 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vishnu.hackernewsclient.R;
+import com.vishnu.hackernewsclient.model.NewsItem;
+
 import java.util.Random;
 
 public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapter.ViewHolder> {
 
     private OnItemClickListener listener;
 
-    protected RecyclerViewAdapter() {
+    public RecyclerViewAdapter() {
         super(
                 new DiffUtil.ItemCallback<NewsItem>() {
                     @Override

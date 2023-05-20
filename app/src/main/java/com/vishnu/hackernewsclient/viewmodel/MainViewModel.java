@@ -17,49 +17,48 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vishnu.hackernewsclient;
+package com.vishnu.hackernewsclient.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.vishnu.hackernewsclient.model.NewsItem;
+import com.vishnu.hackernewsclient.repository.NewsRepository;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentsViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
 
-    private final ArrayList<CommentItem> itemArrayList = new ArrayList<>();
+    private final ArrayList<NewsItem> itemArrayList = new ArrayList<>();
 
-    private MutableLiveData<List<CommentItem>> mutableLiveData = null;
+    private MutableLiveData<List<NewsItem>> mutableLiveData = null;
 
-    public CommentsViewModel() {
+    public MainViewModel() {
         super();
     }
 
-    public MutableLiveData<List<CommentItem>> getChildComments(NewsItem parent) {
+    public MutableLiveData<List<NewsItem>> getTopStories() {
 
-        itemArrayList.clear();
-
-        loadTopStories(parent);
+        if (itemArrayList == null || itemArrayList.isEmpty()) loadTopStories();
 
         return mutableLiveData;
     }
 
-    private void loadTopStories(NewsItem parent) {
+    private void loadTopStories() {
 
         mutableLiveData = new MutableLiveData<>();
 
         new NewsRepository()
-                .getChildComments(
-                        parent,
+                .getTopStories(
                         newsItem -> {
                             if (itemArrayList.contains(newsItem)) return;
 
-                            //                            int i = 0;
-                            //                            while (i < itemArrayList.size()
-                            //                                    && newsItem.getTime() >=
-                            // itemArrayList.get(i).getTime()) i++;
+                            int i = 0;
+                            while (i < itemArrayList.size()
+                                    && newsItem.getScore() <= itemArrayList.get(i).getScore()) i++;
 
-                            itemArrayList.add(/*i,*/ newsItem);
+                            itemArrayList.add(i, newsItem);
                             mutableLiveData.setValue(itemArrayList);
                         });
     }

@@ -17,41 +17,51 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vishnu.hackernewsclient;
+package com.vishnu.hackernewsclient.model;
 
 import androidx.annotation.NonNull;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class CommentItem implements Serializable {
+public class NewsItem implements Serializable {
 
     private long id;
     private String by;
-    private long parent;
+    private int descendants;
     private ArrayList<Long> kids;
+    private int score;
     private long time;
-    private String text;
+    private String title;
     private String type;
+    private String url;
 
-    public CommentItem() {}
+    public NewsItem() {}
 
-    public CommentItem(
+    public NewsItem(
             long id,
             String by,
-            long parent,
+            int descendants,
             ArrayList<Long> kids,
+            int score,
             long time,
-            String text,
-            String type) {
+            String title,
+            String type,
+            String url) {
         this.id = id;
         this.by = by;
-        this.parent = parent;
+        this.descendants = descendants;
         this.kids = kids;
+        this.score = score;
         this.time = time;
-        this.text = text;
+        this.title = title;
         this.type = type;
+        this.url = url;
+    }
+
+    public NewsItem(long id, ArrayList<Long> kids) {
+        this.id = id;
+        this.kids = kids;
     }
 
     public long getId() {
@@ -70,12 +80,12 @@ public class CommentItem implements Serializable {
         this.by = by;
     }
 
-    public long getParent() {
-        return parent;
+    public int getDescendants() {
+        return descendants;
     }
 
-    public void setParent(long parent) {
-        this.parent = parent;
+    public void setDescendants(int descendants) {
+        this.descendants = descendants;
     }
 
     public ArrayList<Long> getKids() {
@@ -86,6 +96,14 @@ public class CommentItem implements Serializable {
         this.kids = kids;
     }
 
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
     public long getTime() {
         return time;
     }
@@ -94,12 +112,12 @@ public class CommentItem implements Serializable {
         this.time = time;
     }
 
-    public String getText() {
-        return text;
+    public String getTitle() {
+        return title;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getType() {
@@ -110,38 +128,53 @@ public class CommentItem implements Serializable {
         this.type = type;
     }
 
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        CommentItem that = (CommentItem) o;
-        return id == that.id
-                && parent == that.parent
-                && time == that.time
-                && Objects.equals(by, that.by)
-                && Objects.equals(text, that.text)
-                && Objects.equals(type, that.type);
+
+        NewsItem newsItem = (NewsItem) o;
+        return id == newsItem.id
+                && descendants == newsItem.descendants
+                && score == newsItem.score
+                && time == newsItem.time
+                && by.equals(newsItem.by)
+                && title.equals(newsItem.title)
+                && type.equals(newsItem.type);
     }
 
     @NonNull
     @Override
     public String toString() {
-        return "CommentItem{"
+        return "NewsItem{"
                 + "id="
                 + id
                 + ", by='"
                 + by
                 + '\''
-                + ", parent="
-                + parent
+                + ", descendants="
+                + descendants
                 + ", kids="
                 + kids
+                + ", score="
+                + score
                 + ", time="
                 + time
-                + ", text='"
-                + text
+                + ", title='"
+                + title
                 + '\''
                 + ", type='"
                 + type
+                + '\''
+                + ", url='"
+                + url
                 + '\''
                 + '}';
     }

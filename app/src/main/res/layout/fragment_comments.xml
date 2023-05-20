@@ -7,7 +7,7 @@
 	android:layout_margin="8dp"
 	android:background="@drawable/bottom_sheet_background"
 	android:orientation="vertical"
-	tools:context=".CommentsFragment">
+	tools:context=".fragment.CommentsFragment">
 
 	<androidx.constraintlayout.widget.ConstraintLayout
 		android:layout_width="match_parent"

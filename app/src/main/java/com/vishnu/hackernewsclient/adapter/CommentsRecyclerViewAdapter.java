@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.vishnu.hackernewsclient;
+package com.vishnu.hackernewsclient.adapter;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -32,6 +32,9 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.vishnu.hackernewsclient.R;
+import com.vishnu.hackernewsclient.model.CommentItem;
+
 import java.util.Random;
 
 public class CommentsRecyclerViewAdapter
@@ -39,7 +42,7 @@ public class CommentsRecyclerViewAdapter
 
     private OnItemClickListener listener;
 
-    protected CommentsRecyclerViewAdapter() {
+    public CommentsRecyclerViewAdapter() {
         super(
                 new DiffUtil.ItemCallback<CommentItem>() {
                     @Override
