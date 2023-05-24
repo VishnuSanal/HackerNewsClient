@@ -19,8 +19,6 @@
 
 package com.vishnu.hackernewsclient.adapter;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,8 +31,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.vishnu.hackernewsclient.R;
 import com.vishnu.hackernewsclient.model.NewsItem;
-
-import java.util.Random;
 
 public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapter.ViewHolder> {
 
@@ -76,25 +72,13 @@ public class RecyclerViewAdapter extends ListAdapter<NewsItem, RecyclerViewAdapt
         holder.linkTV.setText(item.getUrl());
         holder.scoresTV.setText(String.valueOf(item.getScore()));
         holder.authorTV.setText(item.getBy());
+        holder.colorView.setBackgroundColor(item.getColor());
 
         if (item.getKids() != null) {
             String s = String.valueOf(item.getKids().size());
 
             holder.commentCountTV.setText(s.length() >= 2 ? s : s + " "); // hack!
         }
-
-        holder.colorView.setBackground(new ColorDrawable(getCardBGColor()));
-    }
-
-    private int getCardBGColor() {
-
-        String[] colorArray =
-                new String[] {
-                    "#e57373", "#f06292", "#ba68c8", "#9575cd", "#7986cb", "#64b5f6", "#4fc3f7",
-                    "#4dd0e1", "#4db6ac", "#81c784", "#ff8a65", "#a1887f"
-                };
-
-        return Color.parseColor(colorArray[new Random().nextInt(colorArray.length - 1)]);
     }
 
     public void setOnItemClickListener(OnItemClickListener listener) {

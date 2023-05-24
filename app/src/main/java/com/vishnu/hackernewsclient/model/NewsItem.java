@@ -35,6 +35,7 @@ public class NewsItem implements Serializable {
     private String title;
     private String type;
     private String url;
+    private int color;
 
     public NewsItem() {}
 
@@ -47,7 +48,8 @@ public class NewsItem implements Serializable {
             long time,
             String title,
             String type,
-            String url) {
+            String url,
+            int color) {
         this.id = id;
         this.by = by;
         this.descendants = descendants;
@@ -57,6 +59,7 @@ public class NewsItem implements Serializable {
         this.title = title;
         this.type = type;
         this.url = url;
+        this.color = color;
     }
 
     public NewsItem(long id, ArrayList<Long> kids) {
@@ -177,5 +180,13 @@ public class NewsItem implements Serializable {
                 + url
                 + '\''
                 + '}';
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 }

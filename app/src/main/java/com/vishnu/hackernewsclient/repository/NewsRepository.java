@@ -42,6 +42,9 @@ import org.json.JSONException;
 import java.io.UnsupportedEncodingException;
 
 public class NewsRepository {
+
+    private static int ITEM_COUNT = 10;
+
     public void getTopStories(final NewsListAsyncResponse callBack) {
 
         final String url = "https://hacker-news.firebaseio.com/v0/topstories.json";
@@ -58,7 +61,132 @@ public class NewsRepository {
                                                 url,
                                                 null,
                                                 response -> {
-                                                    for (int i = 0; i < 50; i++) {
+                                                    for (int i = 0; i < ITEM_COUNT; i++) {
+                                                        try {
+                                                            long id = response.getLong(i);
+
+                                                            String itemURL =
+                                                                    "https://hacker-news.firebaseio.com/v0/item/"
+                                                                            + id
+                                                                            + ".json";
+
+                                                            AppController.getInstance()
+                                                                    .addToRequestQueue(
+                                                                            new JsonObjectRequest(
+                                                                                    Request.Method
+                                                                                            .GET,
+                                                                                    itemURL,
+                                                                                    null,
+                                                                                    item -> {
+                                                                                        if (null
+                                                                                                != callBack)
+                                                                                            callBack
+                                                                                                    .processFinished(
+                                                                                                            new Gson()
+                                                                                                                    .fromJson(
+                                                                                                                            String
+                                                                                                                                    .valueOf(
+                                                                                                                                            item),
+                                                                                                                            NewsItem
+                                                                                                                                    .class));
+                                                                                    },
+                                                                                    Throwable
+                                                                                            ::printStackTrace));
+
+                                                        } catch (JSONException e) {
+                                                            e.printStackTrace();
+                                                        }
+                                                    }
+                                                },
+                                                Throwable::printStackTrace) {
+                                            @Override
+                                            protected Response<JSONArray> parseNetworkResponse(
+                                                    NetworkResponse response) {
+                                                try {
+                                                    Cache.Entry cacheEntry =
+                                                            HttpHeaderParser.parseCacheHeaders(
+                                                                    response);
+                                                    if (cacheEntry == null) {
+                                                        cacheEntry = new Cache.Entry();
+                                                    }
+                                                    final long cacheHitButRefreshed = 1000;
+                                                    final long cacheExpired = 12 * 60 * 60 * 1000;
+                                                    long now = System.currentTimeMillis();
+                                                    final long softExpire =
+                                                            now + cacheHitButRefreshed;
+                                                    final long ttl = now + cacheExpired;
+                                                    cacheEntry.data = response.data;
+                                                    cacheEntry.softTtl = softExpire;
+                                                    cacheEntry.ttl = ttl;
+                                                    String headerValue;
+                                                    //noinspection ConstantConditions
+                                                    headerValue = response.headers.get("Date");
+                                                    if (headerValue != null) {
+                                                        cacheEntry.serverDate =
+                                                                HttpHeaderParser.parseDateAsEpoch(
+                                                                        headerValue);
+                                                    }
+                                                    headerValue =
+                                                            response.headers.get("Last-Modified");
+                                                    if (headerValue != null) {
+                                                        cacheEntry.lastModified =
+                                                                HttpHeaderParser.parseDateAsEpoch(
+                                                                        headerValue);
+                                                    }
+                                                    cacheEntry.responseHeaders = response.headers;
+                                                    final String jsonString =
+                                                            new String(
+                                                                    response.data,
+                                                                    HttpHeaderParser.parseCharset(
+                                                                            response.headers));
+                                                    return Response.success(
+                                                            new JSONArray(jsonString), cacheEntry);
+                                                } catch (UnsupportedEncodingException
+                                                        | JSONException e) {
+                                                    return Response.error(new ParseError(e));
+                                                }
+                                            }
+
+                                            @Override
+                                            protected void deliverResponse(JSONArray response) {
+                                                super.deliverResponse(response);
+                                            }
+
+                                            @Override
+                                            public void deliverError(VolleyError error) {
+                                                super.deliverError(error);
+                                            }
+
+                                            @Override
+                                            protected VolleyError parseNetworkError(
+                                                    VolleyError volleyError) {
+                                                return super.parseNetworkError(volleyError);
+                                            }
+                                        };
+                                AppController.getInstance().addToRequestQueue(jsonArrayRequest);
+                            }
+                        });
+
+        thread.start();
+    }
+
+    public void getNewStories(final NewsListAsyncResponse callBack) {
+
+        final String url = "https://hacker-news.firebaseio.com/v0/newstories.json";
+
+        Thread thread =
+                new Thread(
+                        new Runnable() {
+                            @Override
+                            public void run() {
+
+                                final JsonArrayRequest jsonArrayRequest =
+                                        new JsonArrayRequest(
+                                                Request.Method.GET,
+                                                url,
+                                                null,
+                                                response -> {
+                                                    for (int i = 0; i < ITEM_COUNT; i++) {
                                                         try {
                                                             long id = response.getLong(i);
 

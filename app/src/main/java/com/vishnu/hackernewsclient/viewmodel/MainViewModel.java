@@ -19,6 +19,8 @@
 
 package com.vishnu.hackernewsclient.viewmodel;
 
+import android.graphics.Color;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
@@ -27,12 +29,15 @@ import com.vishnu.hackernewsclient.repository.NewsRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class MainViewModel extends ViewModel {
 
-    private final ArrayList<NewsItem> itemArrayList = new ArrayList<>();
+    private final ArrayList<NewsItem> topStoriesList = new ArrayList<>();
+    private final ArrayList<NewsItem> newStoriesList = new ArrayList<>();
 
-    private MutableLiveData<List<NewsItem>> mutableLiveData = null;
+    private MutableLiveData<List<NewsItem>> topStoriesLiveData = null;
+    private MutableLiveData<List<NewsItem>> newStoriesLiveData = null;
 
     public MainViewModel() {
         super();
@@ -40,26 +45,66 @@ public class MainViewModel extends ViewModel {
 
     public MutableLiveData<List<NewsItem>> getTopStories() {
 
-        if (itemArrayList == null || itemArrayList.isEmpty()) loadTopStories();
+        if (topStoriesList == null || topStoriesList.isEmpty()) loadTopStories();
 
-        return mutableLiveData;
+        return topStoriesLiveData;
     }
 
     private void loadTopStories() {
 
-        mutableLiveData = new MutableLiveData<>();
+        topStoriesLiveData = new MutableLiveData<>();
 
         new NewsRepository()
                 .getTopStories(
                         newsItem -> {
-                            if (itemArrayList.contains(newsItem)) return;
+                            if (topStoriesList.contains(newsItem)) return;
 
                             int i = 0;
-                            while (i < itemArrayList.size()
-                                    && newsItem.getScore() <= itemArrayList.get(i).getScore()) i++;
+                            while (i < topStoriesList.size()
+                                    && newsItem.getScore() <= topStoriesList.get(i).getScore()) i++;
 
-                            itemArrayList.add(i, newsItem);
-                            mutableLiveData.setValue(itemArrayList);
+                            newsItem.setColor(getRandomColor());
+
+                            topStoriesList.add(i, newsItem);
+                            topStoriesLiveData.setValue(topStoriesList);
                         });
+    }
+
+    public MutableLiveData<List<NewsItem>> getNewStories() {
+
+        if (newStoriesList == null || newStoriesList.isEmpty()) loadNewStories();
+
+        return newStoriesLiveData;
+    }
+
+    private void loadNewStories() {
+
+        newStoriesLiveData = new MutableLiveData<>();
+
+        new NewsRepository()
+                .getNewStories(
+                        newsItem -> {
+                            if (newStoriesList.contains(newsItem)) return;
+
+                            int i = 0;
+                            while (i < newStoriesList.size()
+                                    && newsItem.getTime() <= newStoriesList.get(i).getTime()) i++;
+
+                            newsItem.setColor(getRandomColor());
+
+                            newStoriesList.add(i, newsItem);
+                            newStoriesLiveData.setValue(newStoriesList);
+                        });
+    }
+
+    private int getRandomColor() {
+
+        String[] colorArray =
+                new String[] {
+                    "#e57373", "#f06292", "#ba68c8", "#9575cd", "#7986cb", "#64b5f6", "#4fc3f7",
+                    "#4dd0e1", "#4db6ac", "#81c784", "#ff8a65", "#a1887f"
+                };
+
+        return Color.parseColor(colorArray[new Random().nextInt(colorArray.length - 1)]);
     }
 }

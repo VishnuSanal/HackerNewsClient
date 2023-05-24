@@ -33,6 +33,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.progressindicator.LinearProgressIndicator;
 import com.vishnu.hackernewsclient.R;
 import com.vishnu.hackernewsclient.adapter.RecyclerViewAdapter;
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView titleTV, dateTV;
     private ImageView sortIV;
 
+    private int sortBy = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,6 +69,52 @@ public class MainActivity extends AppCompatActivity {
 
         dateTV.setText(
                 new SimpleDateFormat("E, dd MMMM yyyy", Locale.getDefault()).format(new Date()));
+
+        sortIV.setOnClickListener(
+                v ->
+                        new MaterialAlertDialogBuilder(this)
+                                .setTitle(R.string.sort)
+                                .setSingleChoiceItems(
+                                        new String[] {"Score", "Date"},
+                                        sortBy,
+                                        (dialog, which) -> {
+                                            progressIndicator.setVisibility(View.VISIBLE);
+
+                                            sortBy = which;
+
+                                            if (which == 0) {
+                                                viewModel
+                                                        .getTopStories()
+                                                        .observe(
+                                                                MainActivity.this,
+                                                                list -> {
+                                                                    adapter.submitList(list);
+
+                                                                    adapter.notifyItemRangeChanged(
+                                                                            0, list.size());
+
+                                                                    progressIndicator.setVisibility(
+                                                                            View.GONE);
+                                                                });
+                                            } else {
+                                                viewModel
+                                                        .getNewStories()
+                                                        .observe(
+                                                                MainActivity.this,
+                                                                list -> {
+                                                                    adapter.submitList(list);
+
+                                                                    adapter.notifyItemRangeChanged(
+                                                                            0, list.size());
+
+                                                                    progressIndicator.setVisibility(
+                                                                            View.GONE);
+                                                                });
+                                            }
+
+                                            dialog.dismiss();
+                                        })
+                                .show());
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
