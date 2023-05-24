@@ -4,7 +4,8 @@
 	<style name="Base.Theme.HackerNewsClient" parent="Theme.Material3.DayNight.NoActionBar">
 
 		<!-- Customize your light theme here. -->
-		<!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+		<item name="colorPrimary">@color/white</item>
+		<item name="colorPrimaryDark">@color/lightTextLight</item>
 
 		<item name="backgroundColor">@color/white</item>
 		<item name="cardBackgroundColor">@color/white</item>

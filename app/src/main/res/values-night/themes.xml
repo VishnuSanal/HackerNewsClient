@@ -3,8 +3,9 @@
 	<!-- Base application theme. -->
 	<style name="Base.Theme.HackerNewsClient" parent="Theme.Material3.DayNight.NoActionBar">
 
-		<!-- Customize your dark theme here. -->
-		<!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+<!--		 Customize your dark theme here. -->
+		<item name="colorPrimary">@color/darkBackground</item>
+		<item name="colorPrimaryDark">@color/black</item>
 
 		<item name="backgroundColor">@color/darkBackground</item>
 		<item name="cardBackgroundColor">@color/black</item>
