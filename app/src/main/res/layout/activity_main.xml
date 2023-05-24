@@ -6,14 +6,65 @@
 	android:layout_height="match_parent"
 	tools:context=".activity.MainActivity">
 
+	<TextView
+		android:id="@+id/homeTitleTV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="16dp"
+		android:layout_marginEnd="16dp"
+		android:layout_marginBottom="4dp"
+		android:fontFamily="serif"
+		android:text="@string/hacker_news"
+		android:textColor="?textFillColor"
+		android:textSize="36sp"
+		android:textStyle="bold"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toTopOf="parent" />
+
+	<TextView
+		android:id="@+id/homeDateTV"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_marginStart="16dp"
+		android:layout_marginTop="4dp"
+		android:layout_marginEnd="16dp"
+		android:layout_marginBottom="16dp"
+		android:fontFamily="serif"
+		android:textColor="?textOutlineColor"
+		android:textSize="18sp"
+		android:textStyle="bold"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintHorizontal_bias="0"
+		app:layout_constraintStart_toStartOf="parent"
+		app:layout_constraintTop_toBottomOf="@id/homeTitleTV"
+		tools:text="Wed, 24 May 2023" />
+
+	<ImageView
+		android:id="@+id/homeSortIV"
+		android:layout_width="32dp"
+		android:layout_height="32dp"
+		android:layout_margin="16dp"
+		android:clickable="true"
+		android:focusable="true"
+		android:foreground="?android:attr/selectableItemBackgroundBorderless"
+		android:scaleType="fitXY"
+		android:src="@drawable/ic_sort"
+		app:layout_constraintBottom_toBottomOf="@id/homeTitleTV"
+		app:layout_constraintEnd_toEndOf="parent"
+		app:layout_constraintTop_toTopOf="@id/homeTitleTV" />
+
 	<com.google.android.material.progressindicator.LinearProgressIndicator
 		android:id="@+id/progressIndicator"
 		android:layout_width="0dp"
 		android:layout_height="wrap_content"
+		android:layout_margin="8dp"
 		android:indeterminate="true"
 		app:layout_constraintEnd_toEndOf="parent"
 		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent" />
+		app:layout_constraintTop_toBottomOf="@id/homeDateTV" />
 
 	<androidx.recyclerview.widget.RecyclerView
 		android:id="@+id/recyclerView"
